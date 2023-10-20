@@ -1,0 +1,107 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.modal-card {
+  width: 80%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+
+.close-modal {
+  text-align: right;
+  cursor: pointer;
+}
+
+.header-modal {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-modal p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.modal-navigatiom {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.modal-navigatiom ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* space between the items */
+}
+
+.modal-navigatiom li {
+  display: inline-block;
+}
+
+.modal-navigatiom button {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.modal-navigatiom button:hover {
+  background-color: #0056b3;
+}
+
+.modal-body {
+  margin-top: 20px;
+}
+
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-body input[type="email"],
+.modal-body input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.modal-body input[type="submit"] {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.modal-body input[type="submit"]:hover {
+  background-color: #218838;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}

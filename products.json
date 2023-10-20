@@ -1,0 +1,10 @@
+{"products":
+[
+    {"id": 1, "name": "Laptop", "description": "Short description", "price": 999.99},
+    {"id": 2, "name": "Mouse", "description": "Short description", "price": 19.99 },
+    {"id": 3, "name": "Keyboard", "description": "Short description", "price": 19.99 },
+    {"id": 4, "name": "Monitor", "description": "Short description", "price": 19.99 },
+    {"id": 5, "name": "Macbook", "description": "Short description", "price": 19.99 }
+]
+
+}
