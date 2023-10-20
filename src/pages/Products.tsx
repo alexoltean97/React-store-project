@@ -27,7 +27,6 @@ const Products = () => {
             price: response.data[key].price
           })
         }
-        
 
         // const restProducts = response.data.map((prod: product) => ({
         //   id: prod.id,
@@ -58,6 +57,7 @@ const Products = () => {
                 name={product.name}
                 description={product.description}
                 price={product.price}
+                link={product.id}
               />
             ))}
         </div>

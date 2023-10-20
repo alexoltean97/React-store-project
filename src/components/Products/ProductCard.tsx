@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 const ProductCard = (props) => {
     return(
         <div className="col-md-4 mb-4">
@@ -11,6 +13,8 @@ const ProductCard = (props) => {
             <h5 className="card-title">{props.name}</h5>
             <p className="card-text">{props.description}</p>
             <p className="price">{props.price}</p>
+            <p>{props.id}</p>
+            <p><Link to={`/products/:${props.link}`}>See more.</Link></p>
             <div className="input-group mb-3"></div>
             <button className="btn btn-primary">Add to Cart</button>
           </div>
