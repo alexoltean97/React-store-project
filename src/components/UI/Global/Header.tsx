@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Header = (props) => {
   return (
     <header className="main-header bg-dark">
@@ -24,14 +26,14 @@ const Header = (props) => {
           >
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
+                <NavLink className="nav-link" to="/">
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <NavLink className="nav-link" to="products">
                   Products
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
                 <a
