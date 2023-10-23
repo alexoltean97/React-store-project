@@ -5,7 +5,7 @@ const ProductCard = (props) => {
         <div className="col-md-4 mb-4">
         <div className="card">
           <img
-            src="path_to_image1.jpg"
+            src="https://placehold.co/500x500"
             alt="Product Image 1"
             className="card-img-top"
           />
