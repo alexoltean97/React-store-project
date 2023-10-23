@@ -24,16 +24,9 @@ const Products = () => {
             id: key,
             name: response.data[key].name,
             description: response.data[key].description,
-            price: response.data[key].price
-          })
+            price: response.data[key].price,
+          });
         }
-
-        // const restProducts = response.data.map((prod: product) => ({
-        //   id: prod.id,
-        //   description: prod.description,
-        //   name: prod.name,
-        //   price: prod.price,
-        // }));
 
         setProducts(loadedProducts);
       } catch (error) {

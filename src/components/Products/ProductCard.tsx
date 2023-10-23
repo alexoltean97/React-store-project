@@ -14,7 +14,7 @@ const ProductCard = (props) => {
             <p className="card-text">{props.description}</p>
             <p className="price">{props.price}</p>
             <p>{props.id}</p>
-            <p><Link to={`/products/:${props.link}`}>See more.</Link></p>
+            <p><Link to={`/products/${props.link}`}>See more.</Link></p>
             <div className="input-group mb-3"></div>
             <button className="btn btn-primary">Add to Cart</button>
           </div>

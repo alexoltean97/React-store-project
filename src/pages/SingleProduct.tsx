@@ -1,11 +1,18 @@
-import { useParams } from "react-router-dom";
-
+import axios from "axios";
+import mainUrl from "../globals/environment-vars.js";
+import { useLoaderData } from "react-router-dom";
+import product from "../interfaces/product.js";
 const SingleProduct = () => {
+  const data: product = useLoaderData() as product;
 
-    const params = useParams()
-    return(
-        <h2>{params.productId}</h2>
-    )
-}
+  return <h2>{data.name}</h2>;
+};
 
 export default SingleProduct;
+
+export async function loader({ params }) {
+  const response = await axios.get(
+    `${mainUrl}products/${params.productId}.json`
+  );
+  return response.data;
+}
