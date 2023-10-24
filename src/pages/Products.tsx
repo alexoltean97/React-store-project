@@ -1,5 +1,6 @@
 import product from "../interfaces/product.js";
 import ProductCard from "../components/Products/ProductCard.js";
+import Pagination from "../components/UI/Pagination/Pagination.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import mainUrl from "../globals/environment-vars.js";
@@ -7,6 +8,11 @@ import mainUrl from "../globals/environment-vars.js";
 const Products = () => {
   const [products, setProducts] = useState<product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const recordsPerPage = 6;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
 
   useEffect(() => {
     const getProducts = async () => {
@@ -29,6 +35,7 @@ const Products = () => {
         }
 
         setProducts(loadedProducts);
+        setTotalPages(Math.ceil(loadedProducts.length / recordsPerPage));
       } catch (error) {
         console.log(error);
       }
@@ -37,6 +44,12 @@ const Products = () => {
     getProducts();
   }, []);
 
+  const currentProducts = products.slice(firstIndex, lastIndex);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="products">
       <div className="container mt-4">
@@ -44,7 +57,7 @@ const Products = () => {
           {loading && <p>Loading...</p>}
 
           {!loading &&
-            products.map((product) => (
+            currentProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 name={product.name}
@@ -54,6 +67,12 @@ const Products = () => {
               />
             ))}
         </div>
+
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

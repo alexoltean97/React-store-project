@@ -4,10 +4,12 @@ import axios from "axios";
 import mainUrl from "../globals/environment-vars.js";
 
 import "./Admin.css";
+
 const Admin = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [feedback, setFeedback] = useState("");
 
   const getName = (event) => {
     setName(event.target.value);
@@ -21,23 +23,27 @@ const Admin = () => {
     setPrice(event.target.value);
   };
 
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
   const sendProduct = () => {
     axios
       .post(`${mainUrl}products.json`, {
-       // id: getRandomNumber(6, 100),
         name: name,
         description: description,
         price: price
       })
       .then((response) => {
         console.log(response);
+        setFeedback("Product added succesfully!");
+
+        setTimeout(() => {
+          setFeedback("");
+        }, 3000)
       })
       .catch((error) => {
         console.log(error);
+        setFeedback("Error adding product."); 
+        setTimeout(() => {
+          setFeedback(""); 
+        }, 3000);
       });
   };
 
@@ -76,6 +82,8 @@ const Admin = () => {
 
           <input type="submit" />
         </form>
+        {feedback && <div className="mt-3 alert alert-info">{feedback}</div>}
+
       </div>
 
       <h2>Edit produts table</h2>
