@@ -1,6 +1,7 @@
 import product from "../interfaces/product.js";
 import ProductCard from "../components/Products/ProductCard.js";
 import Pagination from "../components/UI/Pagination/Pagination.js";
+import SearchNavigation from "../components/SearchNavigation/SearchNavigation.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import mainUrl from "../globals/environment-vars.js";
@@ -50,9 +51,14 @@ const Products = () => {
     setCurrentPage(pageNumber);
   };
 
+  // class="navbar navbar-light bg-light"
+
   return (
     <div className="products">
       <div className="container mt-4">
+
+        <SearchNavigation />
+
         <div className="row">
           {loading && <p>Loading...</p>}
 
