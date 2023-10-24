@@ -1,9 +1,8 @@
 import Filter from "./Filter";
 import Search from "./Search";
-const SearchNavigation = () => {
 
-    return(
- 
+const SearchNavigation = ({ onSearch }: { onSearch: (term: string) => void }) => {
+    return (
         <nav
           className="navbar navbar-light bg-light"
           style={{ margin: "20px", padding: "10px" }}
@@ -13,11 +12,10 @@ const SearchNavigation = () => {
           </div>
 
           <div className="col-lg-6">
-            <Search />
+            <Search onSearch={onSearch} />
           </div>
         </nav>
-    
-    )
-}
+    );
+};
 
 export default SearchNavigation;
