@@ -1,7 +1,7 @@
 import axios from "axios";
-import mainUrl from "../globals/environment-vars.js";
+import mainUrl from "../../globals/environment-vars.js";
 import { useLoaderData } from "react-router-dom";
-import product from "../interfaces/product.js";
+import product from "../../interfaces/product.js";
 import "./SingleProducts.css";
 const SingleProduct = () => {
   const data: product = useLoaderData() as product;

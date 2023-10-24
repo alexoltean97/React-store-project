@@ -1,10 +1,10 @@
-import product from "../interfaces/product.js";
-import ProductCard from "../components/Products/ProductCard.js";
-import Pagination from "../components/UI/Pagination/Pagination.js";
-import SearchNavigation from "../components/SearchNavigation/SearchNavigation.js";
+import product from "../../interfaces/product.js";
+import ProductCard from "../../components/Products/ProductCard.js";
+import Pagination from "../../components/UI/Pagination/Pagination.js";
+import SearchNavigation from "../../components/SearchNavigation/SearchNavigation.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import mainUrl from "../globals/environment-vars.js";
+import mainUrl from "../../globals/environment-vars.js";
 
 const Products = () => {
   const [products, setProducts] = useState<product[]>([]);
