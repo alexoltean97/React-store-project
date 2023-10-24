@@ -2,9 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/RootLayout";
 import Home from "../pages/Home";
 import Products from "../pages/Products";
-import SingleProduct, {loader as singleProductLoader} from "../pages/SingleProduct";
+import SingleProduct, {
+  loader as singleProductLoader,
+} from "../pages/SingleProduct";
 import AdminLayout from "../pages/AdminLayout";
-import Admin from "../pages/Admin";
+import ProductsTable from "../pages/ProductsTable";
+import Dashboard from "../pages/Dashboard";
+import Orders from "../pages/Orders";
+import Customers from "../pages/Customers";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/products/:productId",
         element: <SingleProduct />,
-         loader: singleProductLoader,
+        loader: singleProductLoader,
       },
     ],
   },
@@ -24,7 +29,12 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLayout />,
-    children: [{ index: true, element: <Admin /> }],
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: "products", element: <ProductsTable /> },
+      { path: "orders", element: <Orders /> },
+      { path: "customers", element: <Customers /> },
+    ],
   },
 ]);
 

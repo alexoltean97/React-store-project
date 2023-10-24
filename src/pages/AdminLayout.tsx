@@ -4,7 +4,7 @@ import Header from "../components/UI/Global/Header";
 import Footer from "../components/UI/Global/Footer";
 import Authentication from "../components/UI/Modals/Authentication";
 import Cart from "../components/UI/Modals/Cart";
-
+import AdminPanel from "../components/UI/Navigation/AdminPanel";
 const AdminLayout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -22,7 +22,12 @@ const AdminLayout = () => {
       {isModalOpen && <Authentication onClickClose={toggleModal} />}
       {isCartOpen && <Cart onClickClose={toggleCart} />}
       <Header onLoginClick={toggleModal} onCartClick={toggleCart} />
-      <Outlet />
+      <div className="admin-wrapper">
+        <AdminPanel />
+        <div className="main-content">
+          <Outlet />
+        </div>
+      </div>
       <Footer />
     </React.Fragment>
   );
