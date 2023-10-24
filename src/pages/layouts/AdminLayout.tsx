@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/UI/Global/Header";
-import Footer from "../components/UI/Global/Footer";
-import Authentication from "../components/UI/Modals/Authentication";
-import Cart from "../components/UI/Modals/Cart";
-import AdminPanel from "../components/UI/Navigation/AdminPanel";
+import Header from "../../components/UI/Global/Header";
+import Footer from "../../components/UI/Global/Footer";
+import Authentication from "../../components/UI/Modals/Authentication";
+import Cart from "../../components/UI/Modals/Cart";
+import AdminPanel from "../../components/UI/Navigation/AdminPanel";
 const AdminLayout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);

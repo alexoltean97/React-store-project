@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "../pages/RootLayout";
-import Home from "../pages/Home";
-import Products from "../pages/Products";
+import Root from "../pages/layouts/RootLayout";
+import Home from "../pages/users/Home";
+import Products from "../pages/users/Products";
 import SingleProduct, {
   loader as singleProductLoader,
-} from "../pages/SingleProduct";
-import AdminLayout from "../pages/AdminLayout";
-import ProductsTable from "../pages/ProductsTable";
-import Dashboard from "../pages/Dashboard";
-import Orders from "../pages/Orders";
-import Customers from "../pages/Customers";
+} from "../pages/users/SingleProduct";
+import AdminLayout from "../pages/layouts/AdminLayout";
+import ProductsTable from "../pages/admin/ProductsTable";
+import Dashboard from "../pages/admin/Dashboard";
+import Orders from "../pages/admin/Orders";
+import Customers from "../pages/admin/Customers";
 
 const router = createBrowserRouter([
   {
