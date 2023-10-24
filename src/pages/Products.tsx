@@ -11,6 +11,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
   const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
@@ -45,7 +46,17 @@ const Products = () => {
     getProducts();
   }, []);
 
-  const currentProducts = products.slice(firstIndex, lastIndex);
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
+  const currentProducts = products
+    .filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(firstIndex, lastIndex);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -56,8 +67,7 @@ const Products = () => {
   return (
     <div className="products">
       <div className="container mt-4">
-
-        <SearchNavigation />
+        <SearchNavigation onSearch={handleSearch}/>
 
         <div className="row">
           {loading && <p>Loading...</p>}
