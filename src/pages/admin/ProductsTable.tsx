@@ -1,6 +1,5 @@
 import React from "react";
 import "./ProductsTable.css";
-import { useState } from "react";
 import useGetProducts from "../../hooks/useGetProducts";
 
 const ProductsTable = () => {
@@ -14,7 +13,7 @@ const ProductsTable = () => {
     "Quantity",
     "Action",
   ];
-  
+
   return (
     <React.Fragment>
       <div className="container">
