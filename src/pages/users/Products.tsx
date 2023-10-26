@@ -1,37 +1,17 @@
 import ProductCard from "../../components/Products/ProductCard.js";
 import Pagination from "../../components/UI/Pagination/Pagination.js";
 import SearchNavigation from "../../components/SearchNavigation/SearchNavigation.js";
-import { useEffect, useState } from "react";
-import useGetProducts from "../../hooks/useGetProducts.tsx";
+import useProductManagement from "../../hooks/useProductManagement.js";
 
 const Products = () => {
-  const { products: fetchedProducts, loading } = useGetProducts();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [searchTerm, setSearchTerm] = useState("");
-  const recordsPerPage = 6;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-
-  useEffect(() => {
-    setTotalPages(Math.ceil(fetchedProducts.length / recordsPerPage));
-  }, [fetchedProducts]);
-
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
-  };
-
-  const currentProducts = fetchedProducts
-    .filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .slice(firstIndex, lastIndex);
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const {
+    loading,
+    currentProducts,
+    totalPages,
+    currentPage,
+    handleSearch,
+    handlePageChange,
+  } = useProductManagement(6);
 
   return (
     <div className="products">
