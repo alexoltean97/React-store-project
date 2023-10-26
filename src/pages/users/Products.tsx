@@ -1,14 +1,11 @@
-import product from "../../interfaces/product.js";
 import ProductCard from "../../components/Products/ProductCard.js";
 import Pagination from "../../components/UI/Pagination/Pagination.js";
 import SearchNavigation from "../../components/SearchNavigation/SearchNavigation.js";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import mainUrl from "../../globals/environment-vars.js";
+import useGetProducts from "../../hooks/useGetProducts.tsx";
 
 const Products = () => {
-  const [products, setProducts] = useState<product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { products: fetchedProducts, loading } = useGetProducts();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,40 +14,14 @@ const Products = () => {
   const firstIndex = lastIndex - recordsPerPage;
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const response = await axios.get(`${mainUrl}products.json/`);
-
-        if (response) {
-          setLoading(false);
-        }
-
-        const loadedProducts = [];
-
-        for (const key in response.data) {
-          loadedProducts.push({
-            id: key,
-            name: response.data[key].name,
-            description: response.data[key].description,
-            price: response.data[key].price,
-          });
-        }
-
-        setProducts(loadedProducts);
-        setTotalPages(Math.ceil(loadedProducts.length / recordsPerPage));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getProducts();
-  }, []);
+    setTotalPages(Math.ceil(fetchedProducts.length / recordsPerPage));
+  }, [fetchedProducts]);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
   };
 
-  const currentProducts = products
+  const currentProducts = fetchedProducts
     .filter(
       (product) =>
         product.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
@@ -62,12 +33,10 @@ const Products = () => {
     setCurrentPage(pageNumber);
   };
 
-  // class="navbar navbar-light bg-light"
-
   return (
     <div className="products">
       <div className="container mt-4">
-        <SearchNavigation onSearch={handleSearch}/>
+        <SearchNavigation onSearch={handleSearch} />
 
         <div className="row">
           {loading && <p>Loading...</p>}
