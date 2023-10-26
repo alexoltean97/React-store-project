@@ -5,7 +5,6 @@ import Pagination from "../../components/UI/Pagination/Pagination";
 import useProductManagement from "../../hooks/useProductManagement";
 
 const ProductsTable = () => {
-
   const {
     loading,
     currentProducts,
@@ -29,6 +28,9 @@ const ProductsTable = () => {
       <div className="container">
         <h2>Produts table</h2>
         <SearchNavigation onSearch={handleSearch} />
+        <button className="btn btn-primary" style={{margin: '20px'}} type="submit">
+          Add Product
+        </button>
         {loading && <p>Loading...</p>}
         <table className="table table-bordered">
           <thead>
@@ -39,22 +41,22 @@ const ProductsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {!loading && currentProducts.map((product) => (
-              <tr>
-                <td>
-                  <img src="https://placehold.co/50" alt="Placeholder" />
-                </td>
-                <td key={product}>{product.name}</td>
-                <td>{product.category}</td>
-                <td>{product.price}</td>
-                <td>{product.quantity}</td>
-                <td>
-                  <i className="fas fa-pencil-alt"></i>
-                  <i className="fas fa-trash"></i>
-                </td>
-              </tr>
-            ))}
-    
+            {!loading &&
+              currentProducts.map((product) => (
+                <tr>
+                  <td>
+                    <img src="https://placehold.co/50" alt="Placeholder" />
+                  </td>
+                  <td key={product}>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td>{product.price}</td>
+                  <td>{product.quantity}</td>
+                  <td>
+                    <i className="fas fa-pencil-alt"></i>
+                    <i className="fas fa-trash"></i>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
@@ -63,7 +65,6 @@ const ProductsTable = () => {
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
-
       </div>
     </React.Fragment>
   );
