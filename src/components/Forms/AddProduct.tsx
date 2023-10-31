@@ -6,7 +6,9 @@ import mainUrl from "../../globals/environment-vars.js";
 const AddProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState();
+  const [category, setCategory] = useState();
   const [feedback, setFeedback] = useState("");
 
   const getName = (event) => {
@@ -21,12 +23,22 @@ const AddProduct = () => {
     setPrice(event.target.value);
   };
 
+  const getQuantity = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const getCategory = (event) => {
+    setCategory(event.target.value);
+  };
+
   const sendProduct = () => {
     axios
       .post(`${mainUrl}products.json`, {
         name: name,
         description: description,
         price: price,
+        category: category,
+        quantity: quantity
       })
       .then((response) => {
         console.log(response);
@@ -75,6 +87,24 @@ const AddProduct = () => {
           placeholder="Add Price"
           name="price"
         />
+
+        <input
+          type="number"
+          onChange={getQuantity}
+          value={quantity}
+          placeholder="Add Quantity"
+          name="quantity"
+        />
+
+        <input
+          type="text"
+          onChange={getCategory}
+          value={category}
+          placeholder="Add Category"
+          name="category"
+        />
+
+        <input type="file" id="product-image" name="product-image" />
 
         <input type="submit" />
       </form>

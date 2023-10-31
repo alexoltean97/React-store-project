@@ -3,8 +3,17 @@ import "./ProductsTable.css";
 import SearchNavigation from "../../components/SearchNavigation/SearchNavigation";
 import Pagination from "../../components/UI/Pagination/Pagination";
 import useProductManagement from "../../hooks/useProductManagement";
+import ProductAdd from "../../components/UI/Modals/ProductAdd";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const ProductsTable = () => {
+  const [isModal, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModal);
+  };
+
   const {
     loading,
     currentProducts,
@@ -27,8 +36,14 @@ const ProductsTable = () => {
     <React.Fragment>
       <div className="container">
         <h2>Produts table</h2>
+        {isModal && <ProductAdd onClickClose={toggleModal} />}
         <SearchNavigation onSearch={handleSearch} />
-        <button className="btn btn-primary" style={{margin: '20px'}} type="submit">
+        <button
+          onClick={toggleModal}
+          className="btn btn-primary"
+          style={{ margin: "20px" }}
+          type="submit"
+        >
           Add Product
         </button>
         {loading && <p>Loading...</p>}
@@ -52,7 +67,9 @@ const ProductsTable = () => {
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
                   <td>
-                    <i className="fas fa-pencil-alt"></i>
+                    <Link to={`${product.id}/edit`}>
+                      <i className="fas fa-pencil-alt"></i>
+                    </Link>
                     <i className="fas fa-trash"></i>
                   </td>
                 </tr>

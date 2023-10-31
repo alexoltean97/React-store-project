@@ -34,3 +34,15 @@ input[type="submit"]:hover {
 }
 
 
+i{
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.fa-pencil-alt{
+  color: blue;
+}
+
+.fa-trash{
+  color: red;
+}

@@ -3,6 +3,8 @@ interface product {
     name: string;
     description: string;
     price: number;
+    quantity: string;
+    category: string;
 }
 
 export default product;
