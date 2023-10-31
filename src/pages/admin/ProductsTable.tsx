@@ -3,8 +3,19 @@ import "./ProductsTable.css";
 import SearchNavigation from "../../components/SearchNavigation/SearchNavigation";
 import Pagination from "../../components/UI/Pagination/Pagination";
 import useProductManagement from "../../hooks/useProductManagement";
+import ProductAdd from "../../components/UI/Modals/ProductAdd";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import mainUrl from "../../globals/environment-vars";
 
 const ProductsTable = () => {
+  const [isModal, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModal);
+  };
+
   const {
     loading,
     currentProducts,
@@ -27,8 +38,14 @@ const ProductsTable = () => {
     <React.Fragment>
       <div className="container">
         <h2>Produts table</h2>
+        {isModal && <ProductAdd onClickClose={toggleModal} />}
         <SearchNavigation onSearch={handleSearch} />
-        <button className="btn btn-primary" style={{margin: '20px'}} type="submit">
+        <button
+          onClick={toggleModal}
+          className="btn btn-primary"
+          style={{ margin: "20px" }}
+          type="submit"
+        >
           Add Product
         </button>
         {loading && <p>Loading...</p>}
@@ -52,8 +69,26 @@ const ProductsTable = () => {
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
                   <td>
-                    <i className="fas fa-pencil-alt"></i>
-                    <i className="fas fa-trash"></i>
+                    <Link to={`${product.id}/edit`}>
+                      <i className="fas fa-pencil-alt"></i>
+                    </Link>
+                    <i
+                      onClick={async () => {
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete this product?"
+                          )
+                        ) {
+                          try {
+                             await axios.delete(`${mainUrl}products/${product.id}.json`);    
+                             location.reload()                    
+                        } catch (error) {
+                            console.error("Error deleting product:", error);
+                        }
+                        }
+                      }}
+                      className="fas fa-trash"
+                    ></i>
                   </td>
                 </tr>
               ))}

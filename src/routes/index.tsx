@@ -10,6 +10,9 @@ import ProductsTable from "../pages/admin/ProductsTable";
 import Dashboard from "../pages/admin/Dashboard";
 import Orders from "../pages/admin/Orders";
 import Customers from "../pages/admin/Customers";
+import SingleProductDetail, {
+  loader as singleProductAdminLoader,
+} from "../pages/admin/SingleProductDetail";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,11 @@ const router = createBrowserRouter([
       { path: "products", element: <ProductsTable /> },
       { path: "orders", element: <Orders /> },
       { path: "customers", element: <Customers /> },
+      {
+        path: "products/:productId/edit",
+        loader: singleProductAdminLoader,
+        element: <SingleProductDetail />,
+      },
     ],
   },
 ]);
