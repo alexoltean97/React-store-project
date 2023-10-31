@@ -6,6 +6,8 @@ import useProductManagement from "../../hooks/useProductManagement";
 import ProductAdd from "../../components/UI/Modals/ProductAdd";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import mainUrl from "../../globals/environment-vars";
 
 const ProductsTable = () => {
   const [isModal, setIsModalOpen] = useState(false);
@@ -70,7 +72,23 @@ const ProductsTable = () => {
                     <Link to={`${product.id}/edit`}>
                       <i className="fas fa-pencil-alt"></i>
                     </Link>
-                    <i className="fas fa-trash"></i>
+                    <i
+                      onClick={async () => {
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete this product?"
+                          )
+                        ) {
+                          try {
+                             await axios.delete(`${mainUrl}products/${product.id}.json`);    
+                             location.reload()                    
+                        } catch (error) {
+                            console.error("Error deleting product:", error);
+                        }
+                        }
+                      }}
+                      className="fas fa-trash"
+                    ></i>
                   </td>
                 </tr>
               ))}

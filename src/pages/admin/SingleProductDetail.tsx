@@ -5,12 +5,13 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import product from "../../interfaces/product.js";
 import EditProduct from "../../components/Forms/EditProduct.js";
+import { useNavigate   } from "react-router-dom";
 
 const SingleProductDetail = () => {
   const data: product = useLoaderData() as product;
-
+  const navigate = useNavigate();
   const { productId }= useParams();
-
+  const [feedback, setFeedback] = useState("");
   const [formData, setFormData] = useState({
     name: data.name,
     description: data.description,
@@ -29,7 +30,23 @@ const SingleProductDetail = () => {
   }
 
   const updateProduct = async () => {
-    await axios.put(`${mainUrl}products/${productId}.json`, formData);
+    await axios.put(`${mainUrl}products/${productId}.json`, formData)
+    .then((response) => {
+        console.log(response);
+        setFeedback("Product edited succesfully!");
+
+        setTimeout(() => {
+          setFeedback("");
+          navigate("/admin/products")
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+        setFeedback("Error adding product.");
+        setTimeout(() => {
+          setFeedback("");
+        }, 2000);
+      });
   };
 
   const handleSubmit = (event) => {
@@ -45,6 +62,7 @@ const SingleProductDetail = () => {
         onInputChange={handleChange}
         productUpdate={handleSubmit}
       ></EditProduct>
+      {feedback && <div className="mt-3 alert alert-info">{feedback}</div>}
     </div>
   );
 };

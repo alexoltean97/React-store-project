@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate   } from "react-router-dom";
 import mainUrl from "../../globals/environment-vars.js";
 
 const AddProduct = () => {
@@ -10,6 +11,8 @@ const AddProduct = () => {
   const [quantity, setQuantity] = useState();
   const [category, setCategory] = useState();
   const [feedback, setFeedback] = useState("");
+
+  const navigate = useNavigate();
 
   const getName = (event) => {
     setName(event.target.value);
@@ -46,14 +49,15 @@ const AddProduct = () => {
 
         setTimeout(() => {
           setFeedback("");
-        }, 3000);
+          navigate("/admin/products")
+        }, 2000);
       })
       .catch((error) => {
         console.log(error);
         setFeedback("Error adding product.");
         setTimeout(() => {
           setFeedback("");
-        }, 3000);
+        }, 2000);
       });
   };
 
